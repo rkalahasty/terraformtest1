@@ -15,3 +15,17 @@ resource "aws_instance" "ubuntu" {
     Name = "${var.name}"
   }
 }
+
+resource "aws_s3_bucket" "s3bucket" {
+  bucket = "s3bucket"
+  acl    = "private"
+
+  versioning {
+    enabled = true
+  }
+
+  tags = {
+    Environment = "development"
+    Project     = "example"
+  }
+}
