@@ -29,3 +29,13 @@ resource "aws_s3_bucket" "s3bucket" {
     Project     = "example"
   }
 }
+
+resource "aws_s3_bucket" "my_s3_bucket" {
+  bucket = "my-s3-bucket"
+  acl    = "private"
+
+  tags = {
+    Environment = "Development"
+    Owner       = "TeamA"
+  }
+}
