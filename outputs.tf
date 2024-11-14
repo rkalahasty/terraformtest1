@@ -9,3 +9,8 @@ output "bucket_name" {
 output "my_bucket_name" {
   value = aws_s3_bucket.my_s3_bucket.id
 }
+
+output "unique_bucket_name" {
+  value = aws_s3_bucket.unique_bucket.id
+  description = "The name of the unique private bucket"
+}

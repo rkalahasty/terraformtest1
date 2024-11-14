@@ -65,7 +65,32 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "my_s3_bucket" {
   }
 }
 
-resource "aws_s3_bucket_acl" "my_s3_bucket" {
-  bucket = aws_s3_bucket.my_s3_bucket.id
-  acl    = "public-read"
+resource "aws_s3_bucket" "unique_bucket" {
+  bucket = "my-unique-bucket-name"
+  
+  tags = {
+    Environment = "Production"
+    Name        = "Unique Private Bucket"
+  }
+}
+
+resource "aws_s3_bucket_versioning" "unique_bucket" {
+  bucket = aws_s3_bucket.unique_bucket.id
+  versioning_configuration {
+    status = "Disabled"
+  }
+}
+
+resource "aws_s3_bucket_public_access_block" "unique_bucket" {
+  bucket = aws_s3_bucket.unique_bucket.id
+  
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
+resource "aws_s3_bucket_acl" "unique_bucket" {
+  bucket = aws_s3_bucket.unique_bucket.id
+  acl    = "private"
 }
