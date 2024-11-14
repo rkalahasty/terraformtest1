@@ -32,10 +32,40 @@ resource "aws_s3_bucket" "s3bucket" {
 
 resource "aws_s3_bucket" "my_s3_bucket" {
   bucket = "my-s3-bucket"
-  acl    = "private"
-
+  
   tags = {
     Environment = "Development"
-    Owner       = "TeamA"
+    Project     = "ExampleProject"
   }
+}
+
+resource "aws_s3_bucket_public_access_block" "my_s3_bucket" {
+  bucket = aws_s3_bucket.my_s3_bucket.id
+  
+  block_public_acls       = false
+  block_public_policy     = false
+  ignore_public_acls      = false
+  restrict_public_buckets = false
+}
+
+resource "aws_s3_bucket_versioning" "my_s3_bucket" {
+  bucket = aws_s3_bucket.my_s3_bucket.id
+  versioning_configuration {
+    status = "Disabled"
+  }
+}
+
+resource "aws_s3_bucket_server_side_encryption_configuration" "my_s3_bucket" {
+  bucket = aws_s3_bucket.my_s3_bucket.id
+
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
+    }
+  }
+}
+
+resource "aws_s3_bucket_acl" "my_s3_bucket" {
+  bucket = aws_s3_bucket.my_s3_bucket.id
+  acl    = "public-read"
 }
