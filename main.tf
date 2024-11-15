@@ -73,3 +73,31 @@ resource "aws_s3_bucket_versioning" "lebron_bucket_versioning" {
     status = "Disabled"
   }
 }
+
+resource "aws_s3_bucket" "sritans_bucket" {
+  provider = aws.east
+  bucket = var.sritans_bucket_name
+  force_destroy = true
+
+  tags = {
+    Name = "Sritan's Private S3 Bucket"
+  }
+}
+
+resource "aws_s3_bucket_public_access_block" "sritans_bucket_access" {
+  provider = aws.east
+  bucket = aws_s3_bucket.sritans_bucket.id
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
+resource "aws_s3_bucket_versioning" "sritans_bucket_versioning" {
+  provider = aws.east
+  bucket = aws_s3_bucket.sritans_bucket.id
+  versioning_configuration {
+    status = "Disabled"
+  }
+}
