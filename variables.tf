@@ -17,3 +17,8 @@ variable "name" {
   description = "name to pass to Name tag"
   default = "Provisioned by Terraform"
 }
+
+variable "bucket_name" {
+  description = "Name of the S3 bucket"
+  default = "s3bucket"
+}
