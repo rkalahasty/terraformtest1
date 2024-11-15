@@ -23,10 +23,6 @@ variable "bucket_name" {
   default = "s3bucket"
 }
 
-variable "lebron_bucket_name" {
-  description = "Name of the Lebron S3 bucket"
-  default = "lebron"
-}
 
 variable "sritans_bucket_name" {
   description = "Name of Sritan's S3 bucket"
