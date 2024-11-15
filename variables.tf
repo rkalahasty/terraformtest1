@@ -29,7 +29,3 @@ variable "sritans_bucket_name" {
   default = "sritans-bucket"
 }
 
-variable "lebron_bucket_name" {
-  description = "Name of Lebron's S3 bucket"
-  default = "lebron"
-}
