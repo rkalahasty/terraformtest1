@@ -24,3 +24,8 @@ output "sritans_bucket_arn" {
   value = aws_s3_bucket.sritans_bucket.arn
 }
 
+output "rohans_ec2_id" {
+  description = "ID of Rohan's EC2 instance"
+  value       = aws_instance.rohans_ec2.id
+}
+
