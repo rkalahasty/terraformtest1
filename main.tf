@@ -214,13 +214,4 @@ resource "aws_s3_bucket_versioning" "sritans_bucket_versioning" {
   }
 }
 
-resource "aws_instance" "rohans_ec2" {
-  provider      = aws.east
-  ami           = var.ami_id
-  instance_type = "t2.micro"
-
-  tags = {
-    Name = "rohans-ec2"
-  }
-}
 

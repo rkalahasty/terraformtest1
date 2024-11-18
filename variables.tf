@@ -28,8 +28,4 @@ variable "sritans_bucket_name" {
   default     = "sritans-bucket"
 }
 
-variable "ami_id" {
-  description = "AMI ID for EC2 instance"
-  default     = "ami-0abcdef1234567890"
-}
 
