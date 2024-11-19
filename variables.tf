@@ -3,6 +3,11 @@ variable "aws_region" {
   default     = "us-west-1"
 }
 
+variable "general_storage_bucket_name" {
+  description = "Name of the general storage S3 bucket"
+  default     = "general-storage-bucket"
+}
+
 variable "cluster_name" {
   description = "Name of the EKS cluster"
   default     = "my-eks-cluster"

@@ -19,6 +19,9 @@ output "bucket_arn" {
 output "sritans_bucket_name" {
   value = aws_s3_bucket.sritans_bucket.id
 }
+output "general_storage_bucket_name" {
+  value = aws_s3_bucket.general_storage_bucket.id
+}
 
 output "sritans_bucket_arn" {
   value = aws_s3_bucket.sritans_bucket.arn

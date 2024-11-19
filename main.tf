@@ -8,6 +8,24 @@ terraform {
   }
 }
 
+resource "aws_s3_bucket" "general_storage_bucket" {
+  bucket = var.general_storage_bucket_name
+  force_destroy = true
+
+  tags = {
+    Name = "General Storage S3 Bucket"
+  }
+}
+
+resource "aws_s3_bucket_public_access_block" "general_storage_bucket_access" {
+  bucket = aws_s3_bucket.general_storage_bucket.id
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
 provider "aws" {
   region = var.aws_region
 }
