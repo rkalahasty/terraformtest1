@@ -64,6 +64,18 @@ data "aws_availability_zones" "available" {
   state = "available"
 }
 
+resource "aws_instance" "new_instance" {
+  provider      = aws.east
+  ami           = "ami-077062c5cfb91a89e"
+  instance_type = "t2.micro"
+
+  vpc_security_group_ids = [data.aws_security_group.default.id]
+
+  tags = {
+    Name = "NewInstance"
+  }
+}
+
 resource "aws_iam_role" "eks_cluster" {
   name = "eks-cluster-role-${random_string.suffix.result}"
 
