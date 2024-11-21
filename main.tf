@@ -34,7 +34,7 @@ data "aws_security_group" "default" {
 }
 
 resource "aws_s3_bucket" "general_storage_bucket" {
-  bucket = "${lower(var.general_storage_bucket_name)}-${lower(random_string.suffix.result)}"
+  bucket = "${lower(var.general_storage_bucket_name)}-${lower(random_string.suffix.result)}-unique"
   force_destroy = true
 
   tags = {
@@ -212,7 +212,7 @@ resource "aws_eks_node_group" "main" {
 }
 
 resource "aws_s3_bucket" "private_bucket" {
-  bucket = "${lower(var.bucket_name)}-${lower(random_string.suffix.result)}"
+  bucket = "${lower(var.bucket_name)}-${lower(random_string.suffix.result)}-unique"
   force_destroy = true
 
   tags = {
@@ -239,7 +239,7 @@ resource "aws_s3_bucket_versioning" "private_bucket_versioning" {
 
 resource "aws_s3_bucket" "sritans_bucket" {
   provider = aws.east
-  bucket = var.sritans_bucket_name
+  bucket = "${var.sritans_bucket_name}-${lower(random_string.suffix.result)}-unique"
   force_destroy = true
 
   tags = {
