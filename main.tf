@@ -138,13 +138,10 @@ resource "aws_iam_role_policy_attachment" "eks_container_registry_policy" {
   role       = aws_iam_role.eks_nodes.name
 }
 
-resource "aws_vpc" "main" {
-  cidr_block           = "10.0.0.0/16"
-  enable_dns_hostnames = true
-  enable_dns_support   = true
-
-  tags = {
-    Name = "${var.cluster_name}-vpc"
+data "aws_vpc" "main" {
+  filter {
+    name   = "tag:Name"
+    values = ["existing-vpc-name"]
   }
 }
 
