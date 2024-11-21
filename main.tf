@@ -34,7 +34,7 @@ data "aws_security_group" "default" {
 }
 
 resource "aws_s3_bucket" "general_storage_bucket" {
-  bucket = "${var.general_storage_bucket_name}-${random_string.suffix.result}"
+  bucket = "${lower(var.general_storage_bucket_name)}-${lower(random_string.suffix.result)}"
   force_destroy = true
 
   tags = {
@@ -216,7 +216,7 @@ resource "aws_eks_node_group" "main" {
 }
 
 resource "aws_s3_bucket" "private_bucket" {
-  bucket = var.bucket_name
+  bucket = "${lower(var.bucket_name)}-${lower(random_string.suffix.result)}"
   force_destroy = true
 
   tags = {
