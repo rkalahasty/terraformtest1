@@ -243,7 +243,7 @@ resource "aws_s3_bucket" "sritans_bucket" {
   force_destroy = true
 
   tags = {
-    Name = "Sritan's Private S3 Bucket"
+    Name = "Sritans Private S3 Bucket"
   }
 }
 
