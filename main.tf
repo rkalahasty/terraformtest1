@@ -8,6 +8,11 @@ terraform {
   }
 }
 
+resource "random_string" "suffix" {
+  length  = 8
+  special = false
+}
+
 resource "aws_instance" "example" {
   ami           = "ami-018a1ea25ff5268f0"
   instance_type = "t2.micro"
@@ -29,7 +34,7 @@ data "aws_security_group" "default" {
 }
 
 resource "aws_s3_bucket" "general_storage_bucket" {
-  bucket = var.general_storage_bucket_name
+  bucket = "${var.general_storage_bucket_name}-${random_string.suffix.result}"
   force_destroy = true
 
   tags = {
@@ -60,7 +65,7 @@ data "aws_availability_zones" "available" {
 }
 
 resource "aws_iam_role" "eks_cluster" {
-  name = "eks-cluster-role"
+  name = "eks-cluster-role-${random_string.suffix.result}"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -96,7 +101,7 @@ resource "aws_eks_cluster" "main" {
 }
 
 resource "aws_iam_role" "eks_nodes" {
-  name = "eks-node-group-role"
+  name = "eks-node-group-role-${random_string.suffix.result}"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
