@@ -2,6 +2,17 @@ terraform {
   required_version = ">= 0.11.0"
 }
 
+resource "aws_s3_bucket" "lindsays_bucket" {
+  bucket = "lindsays-bucket"
+  acl    = "private"
+
+  region = "us-west-1"
+
+  versioning {
+    enabled = false
+  }
+}
+
 provider "aws" {
   region = "${var.aws_region}"
 }
