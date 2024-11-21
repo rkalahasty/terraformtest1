@@ -52,10 +52,6 @@ resource "aws_s3_bucket_public_access_block" "general_storage_bucket_access" {
 }
 
 provider "aws" {
-  region = var.aws_region
-}
-
-provider "aws" {
   alias  = "east"
   region = "us-east-1"
 }
