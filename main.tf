@@ -13,7 +13,7 @@ resource "aws_instance" "example" {
   instance_type = "t2.micro"
   provider      = aws
 
-  vpc_security_group_ids = [aws_security_group.default.id]
+  vpc_security_group_ids = [data.aws_security_group.default.id]
 
   tags = {
     Name = "ExampleInstance"
