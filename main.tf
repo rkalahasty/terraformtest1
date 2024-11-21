@@ -8,6 +8,26 @@ terraform {
   }
 }
 
+resource "aws_instance" "example" {
+  ami           = "ami-018a1ea25ff5268f0"
+  instance_type = "t2.micro"
+  provider      = aws
+
+  vpc_security_group_ids = [aws_security_group.default.id]
+
+  tags = {
+    Name = "ExampleInstance"
+  }
+}
+
+data "aws_security_group" "default" {
+  filter {
+    name   = "group-name"
+    values = ["default"]
+  }
+  vpc_id = aws_vpc.main.id
+}
+
 resource "aws_s3_bucket" "general_storage_bucket" {
   bucket = var.general_storage_bucket_name
   force_destroy = true
