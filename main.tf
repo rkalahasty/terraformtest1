@@ -2,15 +2,6 @@ terraform {
   required_version = ">= 0.11.0"
 }
 
-resource "aws_s3_bucket_public_access_block" "LindsaysBucket" {
-  bucket = aws_s3_bucket.LindsaysBucket.id
-
-  block_public_acls   = false
-  block_public_policy = false
-  ignore_public_acls  = false
-  restrict_public_buckets = false
-}
-
 resource "aws_s3_bucket" "LindsaysBucket" {
   bucket = "lindsays-bucket"
   acl    = "private"
@@ -18,6 +9,15 @@ resource "aws_s3_bucket" "LindsaysBucket" {
   versioning {
     enabled = false
   }
+}
+
+resource "aws_s3_bucket_public_access_block" "LindsaysBucket" {
+  bucket = aws_s3_bucket.LindsaysBucket.id
+
+  block_public_acls   = true
+  block_public_policy = true
+  ignore_public_acls  = false
+  restrict_public_buckets = false
 }
 
 provider "aws" {
