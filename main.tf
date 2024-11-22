@@ -4,7 +4,7 @@ terraform {
 
 resource "aws_s3_bucket" "LindsaysBucket" {
   bucket = "lindsays-bucket"
-  acl    = "public-read"
+  acl    = "private"
 
   versioning {
     enabled = false
