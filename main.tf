@@ -2,10 +2,9 @@ terraform {
   required_version = ">= 0.11.0"
 }
 
-resource "aws_s3_bucket" "lindsays_bucket" {
+resource "aws_s3_bucket" "LindsaysBucket" {
   bucket = "lindsays-bucket"
-  acl    = "private"
-
+  acl    = "public-read"
 
   versioning {
     enabled = false
